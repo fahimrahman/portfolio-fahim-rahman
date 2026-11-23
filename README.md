@@ -14,7 +14,11 @@ No build step or external service is required. Serve this folder with any static
 
 ## Hosting
 
-Hosting has not been configured. There are no deployment workflows or Pages settings in this repository. Before a future launch, set an absolute social image URL and canonical URL for the selected domain. If the repository path changes, update the paths in `404.html`.
+Published with GitHub Pages from the root of the `main` branch.
+
+Website: https://fahimrahman.github.io/portfolio-fahim-rahman/
+
+There is no build step. Committing changes to `main` updates the Pages deployment. If the repository path or domain changes, update the canonical URL, social image URL, sitemap, and paths in `404.html`.
 
 ## Behaviour and privacy
 
