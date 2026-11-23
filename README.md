@@ -1,31 +1,25 @@
 # Fahim Rahman portfolio
 
-A static editorial portfolio focused on senior software engineering, solution architecture, and production AI.
-
-## Files
-
-- `index.html`: portfolio content
-- `styles.css`: design system and responsive layout
-- `app.js`: architecture explorer, navigation, disclosures, and motion
-- `assets/`: locally served fonts, favicon, and social image
-- `404.html`: error page prepared for the repository path
-
-No build step or external service is required. Serve this folder with any static HTTP server to preview it. All regular page assets use relative URLs, including support for a GitHub project path.
-
-## Hosting
-
-Published with GitHub Pages from the root of the `main` branch.
+A self-contained portfolio about software engineering, solution architecture, and conversational AI, adapted from the supplied portfolio prototype.
 
 Website: https://fahimrahman.github.io/portfolio-fahim-rahman/
 
-There is no build step. Committing changes to `main` updates the Pages deployment. If the repository path or domain changes, update the canonical URL, social image URL, sitemap, and paths in `404.html`.
+## Structure
 
-## Behaviour and privacy
+`index.html` contains the page, styles, scroll choreography, theme switch, and experience dialogs. Visuals use HTML, CSS, and inline SVG. No build step or external dependencies are required.
 
-The architecture explorer is illustrative. It does not call an AI model, connect to employer systems, record audio, or request microphone access. There is no contact form or analytics. Contact opens the visitor's email application; GitHub links to the portfolio owner's profile.
+`assets/` contains the favicon and social preview. The repository also includes a custom `404.html`, a sitemap, and crawler configuration.
 
-The original CV, location, phone number, nationality, detailed project metrics, and confidential materials are excluded.
+## Preview and publish
 
-## Fonts
+Serve this folder with any static HTTP server. GitHub Pages publishes the root of `main`; commits to that branch update the site.
 
-Manrope is distributed under the SIL Open Font License. See `assets/OFL.txt`.
+## Contact
+
+Email links use the standard `mailto:` protocol. Opening an email application requires a browser and device with a configured mail handler.
+
+## Motion and themes
+
+Scroll updates are throttled with `requestAnimationFrame`. Reduced-motion preferences are supported. The light/dark preference is stored locally and can be supplied through the `theme` query parameter.
+
+The architectural illustrations are explanatory visuals, with no live AI, audio recording, or employer-system connection. The original CV and phone number are not included.
