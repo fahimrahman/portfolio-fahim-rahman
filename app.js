@@ -1,6 +1,29 @@
 'use strict';
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 if (!reducedMotion.matches) document.documentElement.classList.add('js-motion');
+
+// Choreograph related content as a single, once-only entrance.
+function prepareRevealGroup(selector, items, startDelay = 0) {
+  document.querySelectorAll(selector).forEach(group => {
+    group.classList.add('reveal', 'reveal-group');
+    group.querySelectorAll(items).forEach((item, index) => {
+      item.classList.remove('reveal');
+      item.classList.add('reveal-item');
+      item.style.setProperty('--reveal-delay', `${Math.min(startDelay + index * 60, 400)}ms`);
+    });
+  });
+}
+prepareRevealGroup('.hero-copy', ':scope > p, :scope > h1, :scope > a');
+prepareRevealGroup('.hero-art', ':scope > .art-top, :scope > svg, :scope > .art-bottom', 180);
+prepareRevealGroup('.section-heading', '.eyebrow, h2, .section-intro');
+prepareRevealGroup('.pipeline', '.pipeline-node');
+prepareRevealGroup('.foundation-row', '.foundation-node');
+prepareRevealGroup('.ai-principles', ':scope > article');
+prepareRevealGroup('.approach-list', ':scope > article');
+prepareRevealGroup('.about-layout', ':scope > div, :scope > aside');
+prepareRevealGroup('.faq-list', ':scope > details');
+prepareRevealGroup('.contact-section', '.eyebrow, h2, .contact-row p, .contact-button, .github-link');
+
 const revealObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -8,7 +31,7 @@ const revealObserver = new IntersectionObserver(entries => {
       revealObserver.unobserve(entry.target);
     }
   });
-}, { threshold: .08 });
+}, { threshold: .08, rootMargin: '0px 0px -32px 0px' });
 document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
 const statement = document.querySelector('[data-word-reveal]');

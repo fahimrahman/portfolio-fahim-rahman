@@ -18,44 +18,58 @@
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}.js-motion .reveal{opacity:1;transform:none}.js-motion .statement .word{color:var(--text)}.statement .word:after{display:none}.mobile-menu nav a{transform:none}}
 @media(max-width:760px){.hero h1{font-size:2.25rem;line-height:2.5rem}.architecture-toolbar{flex-direction:column;align-items:flex-start;gap:var(--spacing-200)}.architecture-toolbar>.title-4{max-width:none;margin-top:0}}
 
-/* Chrome colour with a moving reflection across the clipped headline. */
+
+/* Soft, continuous colour movement: one direction takes twenty seconds. */
 .hero h1 {
-  position: relative;
   background-image: linear-gradient(110deg,
-    #f5f8ff 0%, #8596b7 13%, #ffffff 22%, #a7aac6 32%,
-    #d1bdef 42%, #ffffff 48%, #879fc4 58%, #d3e8fc 67%,
-    #ffffff 78%, #9eacc9 88%, #dfeafb 100%);
+    #e5ebf7 0%, #c5d1e7 18%, #f8faff 32%, #d8ccec 46%,
+    #eef3fd 60%, #bfcfe7 76%, #eff6fa 90%, #dde4f3 100%);
+  background-size: 220% 100%;
+  background-position: 0% 50%;
   -webkit-background-clip: text;
   background-clip: text;
+  animation: headline-fluid 20s cubic-bezier(.45,0,.55,1) infinite alternate;
 }
-.hero-shine {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  user-select: none;
-  background-image: linear-gradient(110deg,
-    transparent 0%, transparent 40%, rgb(224 236 255 / .25) 45%,
-    #ffffff 49%, #ffffff 51%, rgb(245 222 255 / .3) 55%,
-    transparent 60%, transparent 100%);
-  background-size: 250% 100%;
-  background-repeat: no-repeat;
-  background-position: 150% 0;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+@keyframes headline-fluid {
+  from { background-position: 0% 50%; }
+  to { background-position: 100% 50%; }
+}
+
+/* Stagger related elements using the guide's 32px rise and weighted curve. */
+.js-motion .reveal.reveal-group {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+.js-motion .reveal-group .reveal-item {
   opacity: 0;
-  animation: headline-sweep 5s var(--ease) infinite;
+  transform: translateY(32px);
+  transition: transform 700ms var(--ease), opacity 700ms var(--ease);
+  transition-delay: var(--reveal-delay, 0ms);
 }
-@keyframes headline-sweep {
-  0%, 12% { background-position: 150% 0; opacity: 0; }
-  18% { opacity: 1; }
-  65% { background-position: -120% 0; opacity: 1; }
-  72%, 100% { background-position: -120% 0; opacity: 0; }
+.js-motion .reveal-group.visible .reveal-item,
+.js-motion .reveal-group:focus-within .reveal-item {
+  opacity: 1;
+  transform: none;
+}
+.js-motion .reveal:focus-within {
+  opacity: 1;
+  transform: none;
+}
+.js-motion .statement .word {
+  color: rgb(242 243 236 / .3);
 }
 @media (prefers-reduced-motion: reduce) {
-  .hero-shine { display: none; }
+  .hero h1 {
+    animation: none;
+    background-position: 50% 50%;
+  }
+  .js-motion .reveal-group .reveal-item {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 @media (forced-colors: active) {
   .hero h1 { background: none; -webkit-text-fill-color: CanvasText; }
-  .hero-shine { display: none; }
 }
